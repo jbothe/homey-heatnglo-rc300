@@ -1,8 +1,13 @@
 {
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.heatnglo.rc300",
   "version": "1.0.1",
-  "compatibility": ">=1.5.0",
-  "sdk": 2,
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#E2825A",
   "name": {
     "en": "Heat N Glo RC300 Fireplace Remote"
   },
@@ -10,7 +15,15 @@
     "en": "Adds support for fireplaces controlled by the Heat N Glo RC300 Intellifire Plus remote."
   },
   "tags": {
-    "en": ["heatnglo", "intellifire", "remote", "rc300", "fire", "gas", "fireplace"]
+    "en": [
+      "heatnglo",
+      "intellifire",
+      "remote",
+      "rc300",
+      "fire",
+      "gas",
+      "fireplace"
+    ]
   },
   "category": [
     "appliances"
@@ -29,18 +42,107 @@
   "bugs": {
     "url": "https://github.com/jbothe/com.heatnglo.rc300/issues"
   },
-  "capabilities": {
-    "my_fan_speed": {
-      "type": "number",
-      "title": {
-        "en": "Fan Speed"
+  "flow": {
+    "actions": [
+      {
+        "id": "set_fan_speed",
+        "title": {
+          "en": "Set fan speed"
+        },
+        "titleFormatted": {
+          "en": "Set fan speed to [[speed]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rc300"
+          },
+          {
+            "name": "speed",
+            "type": "dropdown",
+            "title": {
+              "en": "Speed"
+            },
+            "values": [
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low"
+                }
+              },
+              {
+                "id": "med",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "getable": true,
-      "setable": true,
-      "min": 0,
-      "max": 2,
-      "step": 1.0
-    }
+      {
+        "id": "set_flame_level",
+        "title": {
+          "en": "Set flame level"
+        },
+        "titleFormatted": {
+          "en": "Set flame level to [[level]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rc300"
+          },
+          {
+            "name": "level",
+            "type": "dropdown",
+            "title": {
+              "en": "Level"
+            },
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Low"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Medium-low"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Medium-high"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "High"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   "drivers": [
     {
@@ -53,7 +155,19 @@
         "small": "/drivers/rc300/assets/images/small.png"
       },
       "class": "heater",
-      "capabilities": [ "onoff" ],
+      "capabilities": [
+        "onoff",
+        "fan_level",
+        "flame_level"
+      ],
+      "capabilitiesOptions": {
+        "fan_level": {
+          "preventInsights": true
+        },
+        "flame_level": {
+          "preventInsights": true
+        }
+      },
       "pair": [
         {
           "id": "list_devices",
@@ -69,6 +183,78 @@
       ]
     }
   ],
+  "capabilities": {
+    "fan_level": {
+      "type": "enum",
+      "title": {
+        "en": "Fan speed"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "low",
+          "title": {
+            "en": "Low"
+          }
+        },
+        {
+          "id": "med",
+          "title": {
+            "en": "Medium"
+          }
+        },
+        {
+          "id": "high",
+          "title": {
+            "en": "High"
+          }
+        }
+      ]
+    },
+    "flame_level": {
+      "type": "enum",
+      "title": {
+        "en": "Flame level"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Low"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Medium-low"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Medium"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Medium-high"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "High"
+          }
+        }
+      ]
+    }
+  },
   "signals": {
     "433": {
       "rc300": {

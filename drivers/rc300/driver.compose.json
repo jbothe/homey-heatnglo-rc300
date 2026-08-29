@@ -1,0 +1,33 @@
+{
+  "id": "rc300",
+  "name": {
+    "en": "Heat N Glo RC300"
+  },
+  "images": {
+    "large": "/drivers/rc300/assets/images/large.png",
+    "small": "/drivers/rc300/assets/images/small.png"
+  },
+  "class": "heater",
+  "capabilities": [ "onoff", "fan_level", "flame_level" ],
+  "capabilitiesOptions": {
+    "fan_level": {
+      "preventInsights": true
+    },
+    "flame_level": {
+      "preventInsights": true
+    }
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_my_devices"
+      }
+    },
+    {
+      "id": "add_my_devices",
+      "template": "add_devices"
+    }
+  ]
+}

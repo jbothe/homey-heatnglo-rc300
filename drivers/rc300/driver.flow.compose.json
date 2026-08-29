@@ -1,0 +1,52 @@
+{
+  "actions": [
+    {
+      "id": "set_fan_speed",
+      "title": {
+        "en": "Set fan speed"
+      },
+      "titleFormatted": {
+        "en": "Set fan speed to [[speed]]"
+      },
+      "args": [
+        {
+          "name": "speed",
+          "type": "dropdown",
+          "title": {
+            "en": "Speed"
+          },
+          "values": [
+            { "id": "low", "label": { "en": "Low" } },
+            { "id": "med", "label": { "en": "Medium" } },
+            { "id": "high", "label": { "en": "High" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "set_flame_level",
+      "title": {
+        "en": "Set flame level"
+      },
+      "titleFormatted": {
+        "en": "Set flame level to [[level]]"
+      },
+      "args": [
+        {
+          "name": "level",
+          "type": "dropdown",
+          "title": {
+            "en": "Level"
+          },
+          "values": [
+            { "id": "1", "label": { "en": "Low" } },
+            { "id": "2", "label": { "en": "Medium-low" } },
+            { "id": "3", "label": { "en": "Medium" } },
+            { "id": "4", "label": { "en": "Medium-high" } },
+            { "id": "5", "label": { "en": "High" } }
+          ]
+        }
+      ]
+    }
+  ]
+}

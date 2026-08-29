@@ -3,7 +3,7 @@
 const Homey = require('homey');
 
 class Rc300App extends Homey.App {
-    onInit() {
+    async onInit() {
         this.log('RC300 is running...');
     }
 }

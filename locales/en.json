@@ -1,1 +1,5 @@
-{}
+{
+  "errors": {
+    "fireplace_off": "Turn the fireplace on before changing the fan speed or flame level."
+  }
+}

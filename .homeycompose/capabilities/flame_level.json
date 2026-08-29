@@ -1,0 +1,16 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Flame level"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "1", "title": { "en": "Low" } },
+    { "id": "2", "title": { "en": "Medium-low" } },
+    { "id": "3", "title": { "en": "Medium" } },
+    { "id": "4", "title": { "en": "Medium-high" } },
+    { "id": "5", "title": { "en": "High" } }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "com.heatnglo.rc300",
+  "version": "1.0.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#E2825A",
+  "name": {
+    "en": "Heat N Glo RC300 Fireplace Remote"
+  },
+  "description": {
+    "en": "Adds support for fireplaces controlled by the Heat N Glo RC300 Intellifire Plus remote."
+  },
+  "tags": {
+    "en": ["heatnglo", "intellifire", "remote", "rc300", "fire", "gas", "fireplace"]
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [
+    "homey:wireless:433"
+  ],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "John Bothe",
+    "email": "jbothe@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jbothe/com.heatnglo.rc300/issues"
+  }
+}
