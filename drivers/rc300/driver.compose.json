@@ -8,6 +8,8 @@
     "small": "/drivers/rc300/assets/images/small.png"
   },
   "class": "heater",
+  "platforms": [ "local" ],
+  "connectivity": [ "rf433" ],
   "rf433": {
     "satelliteMode": true
   },

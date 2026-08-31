@@ -76,6 +76,7 @@
   "bugs": {
     "url": "https://github.com/jbothe/com.heatnglo.rc300/issues"
   },
+  "support": "https://github.com/jbothe/com.heatnglo.rc300/issues",
   "flow": {
     "actions": [
       {
@@ -231,6 +232,12 @@
         "small": "/drivers/rc300/assets/images/small.png"
       },
       "class": "heater",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "rf433"
+      ],
       "rf433": {
         "satelliteMode": true
       },
