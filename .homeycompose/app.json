@@ -39,5 +39,6 @@
   "bugs": {
     "url": "https://github.com/jbothe/homey-heatnglo-rc300/issues"
   },
-  "support": "https://github.com/jbothe/homey-heatnglo-rc300/issues"
+  "support": "https://github.com/jbothe/homey-heatnglo-rc300/issues",
+  "source": "https://github.com/jbothe/homey-heatnglo-rc300"
 }
