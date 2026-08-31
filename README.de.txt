@@ -1,0 +1,3 @@
+Ein Gaskamin gehört zu den letzten Dingen im Haus, für die man noch aufstehen, die Fernbedienung suchen und eine Taste drücken muss. Mit dieser App holst du ihn in Homey, sodass sich das Feuer vom Telefon, über einen Wandschalter oder mit einem Flow entzünden lässt, der den Raum warm hat, bevor du nach Hause kommst, und ihn abends wieder herunterfährt.
+
+Beim Hinzufügen des Kamins lernt Homey deine eigene Fernbedienung, spricht also nur mit deinem Gerät und nie mit dem der Nachbarn. Homey hört auch danach weiter mit: Wird das Feuer von Hand verstellt, bekommt Homey das mit und bleibt auf dem aktuellen Stand, statt still einen veralteten Zustand anzuzeigen.

@@ -1,0 +1,8 @@
+{
+  "1.0.1": {
+    "en": "First release. Control your fireplace's power, flame level and fan speed, with pairing that learns your own remote so Homey follows it when you use it by hand.",
+    "nl": "Eerste versie. Bedien vermogen, vlamhoogte en ventilator van je haard. Bij het toevoegen leert Homey je eigen afstandsbediening en volgt hij die ook als je hem met de hand gebruikt.",
+    "de": "Erste Version. Steuere Ein/Aus, Flammenhöhe und Lüfter deines Kamins. Beim Hinzufügen lernt Homey deine eigene Fernbedienung und folgt ihr auch bei manueller Bedienung.",
+    "fr": "Première version. Pilotez l'allumage, la hauteur de flamme et le ventilateur de votre foyer. Homey apprend votre télécommande à l'ajout et la suit lorsque vous l'utilisez à la main."
+  }
+}

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="
+    M 390,90 H 570 A 70,70 0 0 1 640,160 V 800 A 70,70 0 0 1 570,870 H 390 A 70,70 0 0 1 320,800 V 160 A 70,70 0 0 1 390,90 Z
+    M 385,175 H 575 V 415 H 385 Z
+    M 385,480 H 460 V 555 H 385 Z
+    M 500,480 H 575 V 555 H 500 Z
+    M 385,620 H 575 V 675 H 385 Z
+    M 385,740 H 460 V 815 H 385 Z
+    M 500,740 H 575 V 815 H 500 Z
+  "/>
+</svg>

@@ -1,0 +1,3 @@
+Een gashaard is een van de laatste dingen in huis waarvoor je nog moet opstaan, de afstandsbediening moet zoeken en op een knop moet drukken. Met deze app zet je die in Homey, zodat het vuur aangaat vanaf je telefoon, via een wandschakelaar, of met een Flow die de kamer warm heeft voordat je thuiskomt en het 's avonds weer rustig maakt.
+
+Homey leert je eigen afstandsbediening wanneer je de haard toevoegt, zodat hij alleen met jouw toestel praat en nooit met dat van de buren. Homey blijft daarna ook luisteren: past iemand het vuur met de hand aan, dan merkt Homey dat en blijft de status kloppen in plaats van stilletjes achter te lopen.

@@ -1,0 +1,3 @@
+Un foyer à gaz fait partie des dernières choses de la maison pour lesquelles il faut encore se lever, retrouver la télécommande et appuyer sur un bouton. Cette application l'amène dans Homey : le feu s'allume depuis votre téléphone, depuis un interrupteur mural, ou grâce à un Flow qui réchauffe la pièce avant votre retour et la calme au moment du coucher.
+
+Lorsque vous ajoutez le foyer, Homey apprend votre propre télécommande et ne s'adresse donc qu'à votre appareil, jamais à celui du voisin. Homey continue ensuite d'écouter : si quelqu'un règle le feu à la main, Homey le remarque et reste à jour, au lieu de conserver discrètement un état dépassé.

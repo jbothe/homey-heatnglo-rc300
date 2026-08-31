@@ -1,0 +1,3 @@
+A gas fireplace is one of the last things in the house that still needs someone to get up, find the handset, and press a button on it. This app puts yours into Homey instead, so the fire can be lit from your phone, from a wall switch, or by a Flow that has the room warm before you get home and settles it down again at bedtime.
+
+Homey learns your own handset when you add the fireplace, so it only ever speaks to your unit and never to a neighbour's. It keeps listening afterwards as well, so when someone adjusts the fire by hand Homey notices and stays in step rather than quietly holding a stale idea of what the fireplace is doing.
