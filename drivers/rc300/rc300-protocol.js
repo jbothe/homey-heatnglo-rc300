@@ -21,11 +21,6 @@ const ADDRESS_LENGTH = 24;
 const COMMAND_LENGTH = 23;
 const FRAME_LENGTH = ADDRESS_LENGTH + COMMAND_LENGTH;
 
-// The address of the unit this app was originally developed against. Devices
-// that were paired before pairing learned the address per-unit have nothing in
-// their store, and fall back to this so they keep working.
-const LEGACY_ADDRESS = [2, 2, 3, 2, 2, 2, 3, 1, 3, 2, 3, 2, 2, 3, 3, 0, 2, 3, 3, 2, 2, 3, 3, 0];
-
 const POWER = {
     off: [2, 2, 2, 2, 2, 3, 2, 1, 3, 3, 2, 3, 3, 3, 2, 0, 2, 2, 3, 2, 2, 2, 3],
     on:  [2, 2, 2, 2, 2, 2, 3, 1, 3, 3, 2, 3, 3, 2, 3, 0, 2, 2, 3, 2, 2, 3, 2],
@@ -96,7 +91,6 @@ module.exports = {
     ADDRESS_LENGTH,
     COMMAND_LENGTH,
     FRAME_LENGTH,
-    LEGACY_ADDRESS,
     POWER,
     FAN,
     FLAME,

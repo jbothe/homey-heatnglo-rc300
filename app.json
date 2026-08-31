@@ -12,7 +12,10 @@
     "en": "Heat & Glo"
   },
   "description": {
-    "en": "Control your Heat & Glo gas fireplace's power, flame and fan from Homey."
+    "en": "Control your Heat & Glo gas fireplace's power, flame and fan from Homey.",
+    "nl": "Bedien je Heat & Glo gashaard vanaf Homey: aan/uit, vlamhoogte en ventilator.",
+    "de": "Steuere deinen Heat & Glo Gaskamin mit Homey: Ein/Aus, Flammenhöhe und Lüfter.",
+    "fr": "Pilotez votre foyer à gaz Heat & Glo depuis Homey : allumage, hauteur de flamme et ventilateur."
   },
   "tags": {
     "en": [
@@ -23,6 +26,37 @@
       "fire",
       "gas",
       "fireplace"
+    ],
+    "nl": [
+      "heatnglo",
+      "intellifire",
+      "afstandsbediening",
+      "rc300",
+      "vuur",
+      "gas",
+      "haard",
+      "gashaard",
+      "open haard"
+    ],
+    "de": [
+      "heatnglo",
+      "intellifire",
+      "fernbedienung",
+      "rc300",
+      "feuer",
+      "gas",
+      "kamin",
+      "gaskamin"
+    ],
+    "fr": [
+      "heatnglo",
+      "intellifire",
+      "télécommande",
+      "rc300",
+      "feu",
+      "gaz",
+      "cheminée",
+      "foyer"
     ]
   },
   "category": [
@@ -47,10 +81,16 @@
       {
         "id": "set_fan_speed",
         "title": {
-          "en": "Set fan speed"
+          "en": "Set fan speed",
+          "nl": "Ventilatorsnelheid instellen",
+          "de": "Lüftergeschwindigkeit einstellen",
+          "fr": "Régler la vitesse du ventilateur"
         },
         "titleFormatted": {
-          "en": "Set fan speed to [[speed]]"
+          "en": "Set fan speed to [[speed]]",
+          "nl": "Zet ventilatorsnelheid op [[speed]]",
+          "de": "Lüftergeschwindigkeit auf [[speed]] setzen",
+          "fr": "Régler la vitesse du ventilateur sur [[speed]]"
         },
         "args": [
           {
@@ -62,25 +102,37 @@
             "name": "speed",
             "type": "dropdown",
             "title": {
-              "en": "Speed"
+              "en": "Speed",
+              "nl": "Snelheid",
+              "de": "Geschwindigkeit",
+              "fr": "Vitesse"
             },
             "values": [
               {
                 "id": "low",
                 "label": {
-                  "en": "Low"
+                  "en": "Low",
+                  "nl": "Laag",
+                  "de": "Niedrig",
+                  "fr": "Faible"
                 }
               },
               {
                 "id": "med",
                 "label": {
-                  "en": "Medium"
+                  "en": "Medium",
+                  "nl": "Gemiddeld",
+                  "de": "Mittel",
+                  "fr": "Moyen"
                 }
               },
               {
                 "id": "high",
                 "label": {
-                  "en": "High"
+                  "en": "High",
+                  "nl": "Hoog",
+                  "de": "Hoch",
+                  "fr": "Élevé"
                 }
               }
             ]
@@ -90,10 +142,16 @@
       {
         "id": "set_flame_level",
         "title": {
-          "en": "Set flame level"
+          "en": "Set flame level",
+          "nl": "Vlamhoogte instellen",
+          "de": "Flammenhöhe einstellen",
+          "fr": "Régler la hauteur de flamme"
         },
         "titleFormatted": {
-          "en": "Set flame level to [[level]]"
+          "en": "Set flame level to [[level]]",
+          "nl": "Zet vlamhoogte op [[level]]",
+          "de": "Flammenhöhe auf [[level]] setzen",
+          "fr": "Régler la hauteur de flamme sur [[level]]"
         },
         "args": [
           {
@@ -105,37 +163,55 @@
             "name": "level",
             "type": "dropdown",
             "title": {
-              "en": "Level"
+              "en": "Level",
+              "nl": "Niveau",
+              "de": "Stufe",
+              "fr": "Niveau"
             },
             "values": [
               {
                 "id": "1",
                 "label": {
-                  "en": "Low"
+                  "en": "Low",
+                  "nl": "Laag",
+                  "de": "Niedrig",
+                  "fr": "Faible"
                 }
               },
               {
                 "id": "2",
                 "label": {
-                  "en": "Medium-low"
+                  "en": "Medium-low",
+                  "nl": "Middellaag",
+                  "de": "Mittelniedrig",
+                  "fr": "Moyen-faible"
                 }
               },
               {
                 "id": "3",
                 "label": {
-                  "en": "Medium"
+                  "en": "Medium",
+                  "nl": "Gemiddeld",
+                  "de": "Mittel",
+                  "fr": "Moyen"
                 }
               },
               {
                 "id": "4",
                 "label": {
-                  "en": "Medium-high"
+                  "en": "Medium-high",
+                  "nl": "Middelhoog",
+                  "de": "Mittelhoch",
+                  "fr": "Moyen-élevé"
                 }
               },
               {
                 "id": "5",
                 "label": {
-                  "en": "High"
+                  "en": "High",
+                  "nl": "Hoog",
+                  "de": "Hoch",
+                  "fr": "Élevé"
                 }
               }
             ]
@@ -148,7 +224,7 @@
     {
       "id": "rc300",
       "name": {
-        "en": "Heat & Glo RC300"
+        "en": "IntelliFire Plus RC300"
       },
       "images": {
         "large": "/drivers/rc300/assets/images/large.png",
@@ -196,7 +272,10 @@
     "fan_level": {
       "type": "enum",
       "title": {
-        "en": "Fan speed"
+        "en": "Fan speed",
+        "nl": "Ventilatorsnelheid",
+        "de": "Lüftergeschwindigkeit",
+        "fr": "Vitesse du ventilateur"
       },
       "getable": true,
       "setable": true,
@@ -205,19 +284,28 @@
         {
           "id": "low",
           "title": {
-            "en": "Low"
+            "en": "Low",
+            "nl": "Laag",
+            "de": "Niedrig",
+            "fr": "Faible"
           }
         },
         {
           "id": "med",
           "title": {
-            "en": "Medium"
+            "en": "Medium",
+            "nl": "Gemiddeld",
+            "de": "Mittel",
+            "fr": "Moyen"
           }
         },
         {
           "id": "high",
           "title": {
-            "en": "High"
+            "en": "High",
+            "nl": "Hoog",
+            "de": "Hoch",
+            "fr": "Élevé"
           }
         }
       ]
@@ -225,7 +313,10 @@
     "flame_level": {
       "type": "enum",
       "title": {
-        "en": "Flame level"
+        "en": "Flame level",
+        "nl": "Vlamhoogte",
+        "de": "Flammenhöhe",
+        "fr": "Hauteur de flamme"
       },
       "getable": true,
       "setable": true,
@@ -234,31 +325,46 @@
         {
           "id": "1",
           "title": {
-            "en": "Low"
+            "en": "Low",
+            "nl": "Laag",
+            "de": "Niedrig",
+            "fr": "Faible"
           }
         },
         {
           "id": "2",
           "title": {
-            "en": "Medium-low"
+            "en": "Medium-low",
+            "nl": "Middellaag",
+            "de": "Mittelniedrig",
+            "fr": "Moyen-faible"
           }
         },
         {
           "id": "3",
           "title": {
-            "en": "Medium"
+            "en": "Medium",
+            "nl": "Gemiddeld",
+            "de": "Mittel",
+            "fr": "Moyen"
           }
         },
         {
           "id": "4",
           "title": {
-            "en": "Medium-high"
+            "en": "Medium-high",
+            "nl": "Middelhoog",
+            "de": "Mittelhoch",
+            "fr": "Moyen-élevé"
           }
         },
         {
           "id": "5",
           "title": {
-            "en": "High"
+            "en": "High",
+            "nl": "Hoog",
+            "de": "Hoch",
+            "fr": "Élevé"
           }
         }
       ]

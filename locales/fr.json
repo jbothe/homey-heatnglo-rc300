@@ -1,0 +1,16 @@
+{
+  "errors": {
+    "fireplace_off": "Allumez le foyer avant de modifier la vitesse du ventilateur ou la hauteur de flamme.",
+    "not_paired": "Ajoutez de nouveau ce foyer pour que Homey puisse apprendre votre télécommande."
+  },
+  "pair": {
+    "title": "Ajouter un foyer",
+    "listening": "Appuyez sur ON ou OFF sur votre télécommande",
+    "listening_hint": "Approchez la télécommande RC300 de Homey et appuyez sur la touche ON ou OFF, pour que Homey identifie le foyer auquel elle appartient.",
+    "heard": "Signaux reçus :",
+    "found": "Télécommande détectée",
+    "failed": "Télécommande introuvable",
+    "timeout": "Homey n'a reçu aucun signal ON ou OFF d'une télécommande RC300. Rapprochez la télécommande de Homey et réessayez.",
+    "retry": "Réessayer"
+  }
+}

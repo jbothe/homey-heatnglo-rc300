@@ -1,6 +1,7 @@
 {
   "errors": {
-    "fireplace_off": "Turn the fireplace on before changing the fan speed or flame level."
+    "fireplace_off": "Turn the fireplace on before changing the fan speed or flame level.",
+    "not_paired": "Add this fireplace again so Homey can learn your remote."
   },
   "pair": {
     "title": "Add fireplace",

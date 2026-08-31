@@ -3,22 +3,40 @@
     {
       "id": "set_fan_speed",
       "title": {
-        "en": "Set fan speed"
+        "en": "Set fan speed",
+        "nl": "Ventilatorsnelheid instellen",
+        "de": "Lüftergeschwindigkeit einstellen",
+        "fr": "Régler la vitesse du ventilateur"
       },
       "titleFormatted": {
-        "en": "Set fan speed to [[speed]]"
+        "en": "Set fan speed to [[speed]]",
+        "nl": "Zet ventilatorsnelheid op [[speed]]",
+        "de": "Lüftergeschwindigkeit auf [[speed]] setzen",
+        "fr": "Régler la vitesse du ventilateur sur [[speed]]"
       },
       "args": [
         {
           "name": "speed",
           "type": "dropdown",
           "title": {
-            "en": "Speed"
+            "en": "Speed",
+            "nl": "Snelheid",
+            "de": "Geschwindigkeit",
+            "fr": "Vitesse"
           },
           "values": [
-            { "id": "low", "label": { "en": "Low" } },
-            { "id": "med", "label": { "en": "Medium" } },
-            { "id": "high", "label": { "en": "High" } }
+            {
+              "id": "low",
+              "label": { "en": "Low", "nl": "Laag", "de": "Niedrig", "fr": "Faible" }
+            },
+            {
+              "id": "med",
+              "label": { "en": "Medium", "nl": "Gemiddeld", "de": "Mittel", "fr": "Moyen" }
+            },
+            {
+              "id": "high",
+              "label": { "en": "High", "nl": "Hoog", "de": "Hoch", "fr": "Élevé" }
+            }
           ]
         }
       ]
@@ -26,24 +44,48 @@
     {
       "id": "set_flame_level",
       "title": {
-        "en": "Set flame level"
+        "en": "Set flame level",
+        "nl": "Vlamhoogte instellen",
+        "de": "Flammenhöhe einstellen",
+        "fr": "Régler la hauteur de flamme"
       },
       "titleFormatted": {
-        "en": "Set flame level to [[level]]"
+        "en": "Set flame level to [[level]]",
+        "nl": "Zet vlamhoogte op [[level]]",
+        "de": "Flammenhöhe auf [[level]] setzen",
+        "fr": "Régler la hauteur de flamme sur [[level]]"
       },
       "args": [
         {
           "name": "level",
           "type": "dropdown",
           "title": {
-            "en": "Level"
+            "en": "Level",
+            "nl": "Niveau",
+            "de": "Stufe",
+            "fr": "Niveau"
           },
           "values": [
-            { "id": "1", "label": { "en": "Low" } },
-            { "id": "2", "label": { "en": "Medium-low" } },
-            { "id": "3", "label": { "en": "Medium" } },
-            { "id": "4", "label": { "en": "Medium-high" } },
-            { "id": "5", "label": { "en": "High" } }
+            {
+              "id": "1",
+              "label": { "en": "Low", "nl": "Laag", "de": "Niedrig", "fr": "Faible" }
+            },
+            {
+              "id": "2",
+              "label": { "en": "Medium-low", "nl": "Middellaag", "de": "Mittelniedrig", "fr": "Moyen-faible" }
+            },
+            {
+              "id": "3",
+              "label": { "en": "Medium", "nl": "Gemiddeld", "de": "Mittel", "fr": "Moyen" }
+            },
+            {
+              "id": "4",
+              "label": { "en": "Medium-high", "nl": "Middelhoog", "de": "Mittelhoch", "fr": "Moyen-élevé" }
+            },
+            {
+              "id": "5",
+              "label": { "en": "High", "nl": "Hoog", "de": "Hoch", "fr": "Élevé" }
+            }
           ]
         }
       ]

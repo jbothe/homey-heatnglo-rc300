@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const { SIGNAL_ID, LEGACY_ADDRESS, POWER, FAN, FLAME, sameAddress } = require('./rc300-protocol');
+const { SIGNAL_ID, ADDRESS_LENGTH, POWER, FAN, FLAME, sameAddress } = require('./rc300-protocol');
 
 // One press of the remote can reach us as two or three separate receptions: the
 // `isFirst` flag only groups frames Homey heard as a single burst, and reception
@@ -16,12 +16,17 @@ class Rc300Device extends Homey.Device {
     async onInit() {
         this.rc300Signal = this.homey.rf.getSignal433(SIGNAL_ID);
 
-        // Devices paired before the app learned addresses per-unit have nothing
-        // stored, so fall back to the address this app shipped with.
-        const learned = this.getStoreValue('address');
-        this.address = learned || LEGACY_ADDRESS;
-        this.log(`initialised; address ${this.address.join('')}`,
-            learned ? '(learned at pairing)' : '(fallback: paired before addresses were learned)');
+        // The address is learned from the user's own remote during pairing. There
+        // is no default: transmitting an address we guessed would drive whichever
+        // fireplace happens to answer to it, so a device without one stays
+        // unavailable until it is added again.
+        this.address = this.getStoreValue('address');
+        if (!Array.isArray(this.address) || this.address.length !== ADDRESS_LENGTH) {
+            this.error('no address stored; the device must be added again');
+            await this.setUnavailable(this.homey.__('errors.not_paired'));
+            return;
+        }
+        this.log(`initialised; address ${this.address.join('')}`);
 
         // Register the callback to handle state changes
         this.registerCapabilityListener('onoff', this.onCapabilityOnOff.bind(this));

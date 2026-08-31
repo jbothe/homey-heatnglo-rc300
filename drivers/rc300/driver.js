@@ -81,7 +81,9 @@ class Rc300Driver extends Homey.Driver {
 
             return [
                 {
-                    name: 'Heat & Glo Fireplace',
+                    // Take the name from the driver manifest so it stays in step
+                    // with it, and in the user's language.
+                    name: this.homey.__(this.manifest.name),
                     // The address makes this stable across re-pairs, and unique
                     // if a household has more than one fireplace.
                     data: { id: `rc300-${address.join('')}` },

@@ -11,10 +11,16 @@
     "en": "Heat & Glo"
   },
   "description": {
-    "en": "Control your Heat & Glo gas fireplace's power, flame and fan from Homey."
+    "en": "Control your Heat & Glo gas fireplace's power, flame and fan from Homey.",
+    "nl": "Bedien je Heat & Glo gashaard vanaf Homey: aan/uit, vlamhoogte en ventilator.",
+    "de": "Steuere deinen Heat & Glo Gaskamin mit Homey: Ein/Aus, Flammenhöhe und Lüfter.",
+    "fr": "Pilotez votre foyer à gaz Heat & Glo depuis Homey : allumage, hauteur de flamme et ventilateur."
   },
   "tags": {
-    "en": ["heatnglo", "intellifire", "remote", "rc300", "fire", "gas", "fireplace"]
+    "en": ["heatnglo", "intellifire", "remote", "rc300", "fire", "gas", "fireplace"],
+    "nl": ["heatnglo", "intellifire", "afstandsbediening", "rc300", "vuur", "gas", "haard", "gashaard", "open haard"],
+    "de": ["heatnglo", "intellifire", "fernbedienung", "rc300", "feuer", "gas", "kamin", "gaskamin"],
+    "fr": ["heatnglo", "intellifire", "télécommande", "rc300", "feu", "gaz", "cheminée", "foyer"]
   },
   "category": [
     "appliances"

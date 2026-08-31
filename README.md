@@ -1,7 +1,8 @@
-# Heat & Glo RC300 (AKA IntelliFire Plus) Gas Fireplace Remote
+# Heat & Glo — IntelliFire Plus RC300
 
-Control a Heat & Glo gas fireplace from Homey, by emulating the RC300 (IntelliFire Plus) 433 MHz
-remote.
+Control a Heat & Glo gas fireplace from Homey, by emulating the IntelliFire Plus RC300 433 MHz
+remote. Heat & Glo is the manufacturer; the IntelliFire Plus RC300 is the specific remote/receiver
+this app speaks to.
 
 What works:
 
@@ -22,9 +23,14 @@ Not supported:
 
 ## Pairing
 
-Homey learns which fireplace to talk to by listening to your existing remote: when adding the
-device, press any button on the RC300 while holding it near Homey. Homey captures the remote's
-address and transmits as that remote from then on.
+Homey learns which fireplace to talk to by listening to your existing remote. When adding the
+device, hold the RC300 near Homey and press its **ON** or **OFF** button. Homey captures the
+remote's address and transmits as that remote from then on.
+
+It has to be ON or OFF specifically — pairing ignores the fan and flame buttons, which are
+ambiguous to press and only do anything while the fireplace is already lit. A device that has no
+address stays unavailable until it's added again; the app never guesses one, since transmitting a
+guessed address would drive whichever fireplace happened to answer to it.
 
 ## Protocol
 

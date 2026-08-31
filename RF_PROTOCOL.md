@@ -1,7 +1,7 @@
-# RC300 / Intellifire Plus 433MHz RF Protocol
+# IntelliFire Plus RC300 433MHz RF Protocol
 
-This documents what's currently known about the RF protocol used by the Heat N Glo RC300
-(Intellifire Plus) remote, reverse-engineered from the `ON`/`OFF` commands already implemented in
+This documents what's currently known about the RF protocol used by the Heat & Glo IntelliFire
+Plus RC300 remote, reverse-engineered from the `ON`/`OFF` commands already implemented in
 [`drivers/rc300/device.js`](drivers/rc300/device.js) plus 3 captured fan-speed commands
 (`LOW`/`MED`/`HIGH`) and 5 captured flame-level commands (`1`–`5`), none of the latter 8 wired up
 yet. It's a working hypothesis based on comparing 10 payloads, not a datasheet — treat the

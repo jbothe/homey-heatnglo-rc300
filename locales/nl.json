@@ -1,0 +1,16 @@
+{
+  "errors": {
+    "fireplace_off": "Zet de haard aan voordat je de ventilatorsnelheid of vlamhoogte wijzigt.",
+    "not_paired": "Voeg deze haard opnieuw toe, zodat Homey je afstandsbediening kan leren."
+  },
+  "pair": {
+    "title": "Haard toevoegen",
+    "listening": "Druk op ON of OFF op je afstandsbediening",
+    "listening_hint": "Houd de RC300-afstandsbediening bij Homey en druk op de ON- of OFF-knop, zodat Homey weet bij welke haard hij hoort.",
+    "heard": "Signalen ontvangen:",
+    "found": "Afstandsbediening gevonden",
+    "failed": "Afstandsbediening niet gevonden",
+    "timeout": "Homey heeft geen ON- of OFF-signaal van een RC300-afstandsbediening ontvangen. Houd de afstandsbediening dichter bij Homey en probeer het opnieuw.",
+    "retry": "Opnieuw proberen"
+  }
+}

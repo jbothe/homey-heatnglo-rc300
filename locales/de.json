@@ -1,0 +1,16 @@
+{
+  "errors": {
+    "fireplace_off": "Schalte den Kamin ein, bevor du Lüftergeschwindigkeit oder Flammenhöhe änderst.",
+    "not_paired": "Füge diesen Kamin erneut hinzu, damit Homey deine Fernbedienung lernen kann."
+  },
+  "pair": {
+    "title": "Kamin hinzufügen",
+    "listening": "Drücke ON oder OFF auf deiner Fernbedienung",
+    "listening_hint": "Halte die RC300-Fernbedienung in die Nähe von Homey und drücke die ON- oder OFF-Taste, damit Homey erkennt, zu welchem Kamin sie gehört.",
+    "heard": "Empfangene Signale:",
+    "found": "Fernbedienung gefunden",
+    "failed": "Fernbedienung nicht gefunden",
+    "timeout": "Homey hat kein ON- oder OFF-Signal einer RC300-Fernbedienung empfangen. Halte die Fernbedienung näher an Homey und versuche es erneut.",
+    "retry": "Erneut versuchen"
+  }
+}

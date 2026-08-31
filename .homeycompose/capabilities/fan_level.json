@@ -1,14 +1,26 @@
 {
   "type": "enum",
   "title": {
-    "en": "Fan speed"
+    "en": "Fan speed",
+    "nl": "Ventilatorsnelheid",
+    "de": "Lüftergeschwindigkeit",
+    "fr": "Vitesse du ventilateur"
   },
   "getable": true,
   "setable": true,
   "uiComponent": "picker",
   "values": [
-    { "id": "low", "title": { "en": "Low" } },
-    { "id": "med", "title": { "en": "Medium" } },
-    { "id": "high", "title": { "en": "High" } }
+    {
+      "id": "low",
+      "title": { "en": "Low", "nl": "Laag", "de": "Niedrig", "fr": "Faible" }
+    },
+    {
+      "id": "med",
+      "title": { "en": "Medium", "nl": "Gemiddeld", "de": "Mittel", "fr": "Moyen" }
+    },
+    {
+      "id": "high",
+      "title": { "en": "High", "nl": "Hoog", "de": "Hoch", "fr": "Élevé" }
+    }
   ]
 }
