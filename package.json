@@ -7,9 +7,9 @@
   "author": "John Bothe <jbothe@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jbothe/com.heatnglo.rc300"
+    "url": "https://github.com/jbothe/homey-heatnglo-rc300"
   },
   "bugs": {
-    "url": "https://github.com/jbothe/com.heatnglo.rc300/issues"
+    "url": "https://github.com/jbothe/homey-heatnglo-rc300/issues"
   }
 }

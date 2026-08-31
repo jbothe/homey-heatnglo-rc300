@@ -74,9 +74,9 @@
     "email": "jbothe@gmail.com"
   },
   "bugs": {
-    "url": "https://github.com/jbothe/com.heatnglo.rc300/issues"
+    "url": "https://github.com/jbothe/homey-heatnglo-rc300/issues"
   },
-  "support": "https://github.com/jbothe/com.heatnglo.rc300/issues",
+  "support": "https://github.com/jbothe/homey-heatnglo-rc300/issues",
   "flow": {
     "actions": [
       {
