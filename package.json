@@ -1,6 +1,6 @@
 {
   "name": "com.heatnglo.rc300",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Adds support for fireplaces controlled by the Heat N Glo RC300 Intellifire Plus remote.",
   "main": "app.js",
   "license": "GPL-3.0",

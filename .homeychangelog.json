@@ -1,8 +1,8 @@
 {
-  "1.0.1": {
-    "en": "First release. Control your fireplace's power, flame level and fan speed, with pairing that learns your own remote so Homey follows it when you use it by hand.",
-    "nl": "Eerste versie. Bedien vermogen, vlamhoogte en ventilator van je haard. Bij het toevoegen leert Homey je eigen afstandsbediening en volgt hij die ook als je hem met de hand gebruikt.",
-    "de": "Erste Version. Steuere Ein/Aus, Flammenhöhe und Lüfter deines Kamins. Beim Hinzufügen lernt Homey deine eigene Fernbedienung und folgt ihr auch bei manueller Bedienung.",
-    "fr": "Première version. Pilotez l'allumage, la hauteur de flamme et le ventilateur de votre foyer. Homey apprend votre télécommande à l'ajout et la suit lorsque vous l'utilisez à la main."
+  "2.0.0": {
+    "en": "Rebuilt on Homey SDK v3. Adds fan speed and flame level, pairing that learns your own remote so the app only drives your fireplace, and state that follows the handset when you use it by hand.",
+    "nl": "Herbouwd op Homey SDK v3. Nieuw: ventilatorsnelheid en vlamhoogte, koppelen waarbij Homey je eigen afstandsbediening leert zodat de app alleen jouw haard aanstuurt, en een status die de afstandsbediening volgt als je die met de hand gebruikt.",
+    "de": "Neu aufgebaut auf Homey SDK v3. Neu: Lüftergeschwindigkeit und Flammenhöhe, eine Kopplung, die deine eigene Fernbedienung lernt, sodass die App nur deinen Kamin steuert, und ein Status, der der Fernbedienung bei manueller Bedienung folgt.",
+    "fr": "Reconstruit sur le SDK v3 de Homey. Nouveau : vitesse du ventilateur et hauteur de flamme, un appairage qui apprend votre propre télécommande afin que l'application ne pilote que votre foyer, et un état qui suit la télécommande lorsque vous l'utilisez à la main."
   }
 }

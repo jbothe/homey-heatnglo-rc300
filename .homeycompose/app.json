@@ -1,6 +1,6 @@
 {
   "id": "com.heatnglo.rc300",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -23,7 +23,7 @@
     "fr": ["heatnglo", "intellifire", "télécommande", "rc300", "feu", "gaz", "cheminée", "foyer"]
   },
   "category": [
-    "appliances"
+    "climate"
   ],
   "permissions": [
     "homey:wireless:433"
