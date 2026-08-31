@@ -1,11 +1,13 @@
 <svg viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="
-    M 390,90 H 570 A 70,70 0 0 1 640,160 V 800 A 70,70 0 0 1 570,870 H 390 A 70,70 0 0 1 320,800 V 160 A 70,70 0 0 1 390,90 Z
-    M 385,175 H 575 V 415 H 385 Z
-    M 385,480 H 460 V 555 H 385 Z
-    M 500,480 H 575 V 555 H 500 Z
-    M 385,620 H 575 V 675 H 385 Z
-    M 385,740 H 460 V 815 H 385 Z
-    M 500,740 H 575 V 815 H 500 Z
-  "/>
+  <!-- Fire icon, from Vecteezy (vecteezy_fire-icon-simple-vector-perfect-
+       illustration_13821331). Paths are unmodified. The source draws a small
+       flame in a large 2100x2100 artboard, so the transform crops to the
+       artwork bounds and scales it to fill the icon canvas; without this the
+       flame renders at about a quarter of the canvas width.
+       The source background rect is dropped, since Homey icons must be
+       transparent, and the two paths are merged under evenodd so the inner
+       flame reads as a hole rather than needing a second colour. -->
+  <g transform="translate(-673.87, -673.86) scale(1.098920)">
+    <path fill-rule="evenodd" fill="#FFFFFF" d="M 1310.578125 1195.378906 C 1285.988281 1322.859375 1154.929688 1417.628906 1038.308594 1415.175781 C 927.375 1412.847656 812.683594 1322.902344 788.304688 1195.378906 C 748.234375 985.78125 1048.058594 910.488281 934.300781 665.621094 C 934.300781 665.621094 1097.378906 737.199219 1170.949219 933.371094 C 1196.929688 942.558594 1208.121094 872.851562 1175.589844 833.300781 C 1307.898438 941.730469 1326.601562 1112.324219 1310.578125 1195.378906 Z M 1310.578125 1195.378906  M 933.574219 1336.152344 C 944.558594 1393.109375 1003.121094 1435.449219 1055.21875 1434.355469 C 1104.789062 1433.3125 1156.03125 1393.125 1166.929688 1336.152344 C 1184.828125 1242.5 1050.871094 1208.863281 1101.691406 1099.460938 C 1101.691406 1099.460938 1028.828125 1131.4375 995.957031 1219.085938 C 984.351562 1223.1875 979.351562 1192.046875 993.886719 1174.375 C 934.773438 1222.820312 926.417969 1299.042969 933.574219 1336.152344 Z M 933.574219 1336.152344 "/>
+  </g>
 </svg>
