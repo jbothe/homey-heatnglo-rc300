@@ -1,13 +1,16 @@
 {
   "id": "rc300",
   "name": {
-    "en": "Heat N Glo RC300"
+    "en": "Heat & Glo RC300"
   },
   "images": {
     "large": "/drivers/rc300/assets/images/large.png",
     "small": "/drivers/rc300/assets/images/small.png"
   },
   "class": "heater",
+  "rf433": {
+    "satelliteMode": true
+  },
   "capabilities": [ "onoff", "fan_level", "flame_level" ],
   "capabilitiesOptions": {
     "fan_level": {
@@ -18,6 +21,12 @@
     }
   },
   "pair": [
+    {
+      "id": "learn",
+      "navigation": {
+        "next": "list_devices"
+      }
+    },
     {
       "id": "list_devices",
       "template": "list_devices",

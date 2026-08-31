@@ -1,5 +1,15 @@
 {
   "errors": {
     "fireplace_off": "Turn the fireplace on before changing the fan speed or flame level."
+  },
+  "pair": {
+    "title": "Add fireplace",
+    "listening": "Press ON or OFF on your remote",
+    "listening_hint": "Hold the RC300 remote near Homey and press the ON or OFF button, so Homey can learn which fireplace it belongs to.",
+    "heard": "Signals heard:",
+    "found": "Remote found",
+    "failed": "Couldn't find your remote",
+    "timeout": "Homey didn't hear an ON or OFF press from an RC300 remote. Move the remote closer to Homey and try again.",
+    "retry": "Try again"
   }
 }

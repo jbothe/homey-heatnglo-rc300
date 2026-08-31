@@ -10,10 +10,6 @@
     1225,
     900
   ],
-  "eof": [
-    5000,
-    5000
-  ],
   "words": [
     [
       1500,
@@ -33,9 +29,9 @@
     ]
   ],
   "interval": 18000,
-  "sensitivity": 0.5,
-  "repetitions": 30,
+  "sensitivity": 0.3,
+  "repetitions": 10,
   "minimalLength": 47,
   "maximalLength": 47,
-  "txOnly": true
+  "rxTimeout": 255
 }

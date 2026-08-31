@@ -6,12 +6,12 @@
   "platforms": [
     "local"
   ],
-  "brandColor": "#E2825A",
+  "brandColor": "#EF7024",
   "name": {
-    "en": "Heat N Glo RC300 Fireplace Remote"
+    "en": "Heat & Glo"
   },
   "description": {
-    "en": "Adds support for fireplaces controlled by the Heat N Glo RC300 Intellifire Plus remote."
+    "en": "Control your Heat & Glo gas fireplace's power, flame and fan from Homey."
   },
   "tags": {
     "en": ["heatnglo", "intellifire", "remote", "rc300", "fire", "gas", "fireplace"]

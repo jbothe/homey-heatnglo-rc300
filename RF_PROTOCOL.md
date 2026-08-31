@@ -8,6 +8,78 @@ yet. It's a working hypothesis based on comparing 10 payloads, not a datasheet �
 "structure" section as a guide for reverse-engineering more commands, not as a specification
 handed down from the manufacturer.
 
+## Receiving: two things Homey requires
+
+Transmitting worked from the start; receiving took a long time to get working, and needed **two
+independent** changes. Either one missing produces exactly the same symptom — `enableRX()`
+resolves successfully and then no `payload` event ever fires — so they cannot be diagnosed one at
+a time.
+
+**1. The driver must declare itself an RF receiver.** In
+[`driver.compose.json`](drivers/rc300/driver.compose.json):
+
+```json
+"rf433": { "satelliteMode": true }
+```
+
+Without this Homey never routes any received frame to the driver at all — not even to a
+deliberately permissive signal definition. This is documented only in the README of
+[homey-rfdriver](https://github.com/athombv/node-homey-rfdriver), under the *transmitter* (learn
+from a remote) case.
+
+**2. The signal definition must omit `eof`.** Homey will not match an incoming frame against a
+definition that declares an `eof` unless it observes that eof on air. The RC300's frames are
+followed by a silence longer than the 32767us an `eof` value can express, so no eof we can write
+is ever satisfied. Verified by holding everything else constant and varying only the eof:
+`[5000,5000]`, `[5000]`, `[1000]` and `[32767]` all received nothing, while omitting the property
+received the frame immediately.
+
+`txOnly` must also be absent (it defaults to **false**), since it would disable receiving. Note it
+never needed removing to *enable* receiving on its own — that was a red herring early on.
+
+### One definition serves both directions
+
+`eof` was the only property whose correct value differed between transmitting and receiving, and
+it is now omitted for both. Everything else that differs affects one direction only, so a single
+`rc300` definition covers both:
+
+| Property | Affects | Value | Why |
+|---|---|---|---|
+| `repetitions` | transmit | `10` | matches the remote; 30 made the fireplace beep twice |
+| `interval` | transmit | `18000` | gap between repetitions |
+| `sensitivity` | receive | `0.3` | matching tolerance; real frames arrive at ~0.009 deviation |
+| `rxTimeout` | receive | `255` | frame is 70.5ms, far longer than the 10ms default |
+
+The signal id lives in [`rc300-protocol.js`](drivers/rc300/rc300-protocol.js) as `SIGNAL_ID` so
+the driver and device reference one place.
+
+## Transmit timing
+
+A single frame is 70.5ms (5875us of SOF plus 64650us of payload). Two properties of the transmit
+definition were originally set higher than the real remote uses, and both have been corrected:
+
+**`repetitions` was 30, now 10.** At 30 the app transmitted for 2.94 seconds per command, and the
+fireplace **beeped twice** — its receiver re-triggers if it keeps hearing the same command, so one
+Homey command registered as two button presses. The remote's own captures contain 10-11 frames per
+press, so 10 matches the hardware's behaviour. Commands now take 0.87s, 3.4x shorter.
+
+**`eof` was `[5000, 5000]`, now omitted.** That transmitted a 5ms carrier burst followed by 5ms of
+silence after every frame — something the real remote never sends: no value anywhere near 5000us
+appears in any of the 5775 captured values, where frames simply end and are followed by silence.
+Removing it makes the transmission faithful to the remote and saves 10ms per repetition.
+
+Repetitions are separated by `interval` (18000us) regardless, so dropping the eof does not run
+frames together.
+
+Note that `Signal#tx()` resolves once Homey has **queued** the transmission, not once the
+repetitions have finished going out — observed call times are 10-40ms against ~870ms of actual
+airtime. So the duration in the app's `tx ... (queued in Nms)` log lines is call latency, and is
+not a measure of how long the radio was busy.
+
+Incidentally, the `payload` event's third argument is a deviation figure: real RC300 frames
+arrive at ~0.009, while noise matched against a loose definition sits around 0.28. That confirms
+`sensitivity` (max 0.5) was never the obstacle it looked like.
+
 ## Physical layer
 
 Defined in [`.homeycompose/signals/433/rc300.json`](.homeycompose/signals/433/rc300.json)
@@ -105,7 +177,7 @@ Comparing all 10 payloads position-by-position:
 
 | Region | Positions | Behavior |
 |---|---|---|
-| Preamble | 0–23 | **Identical across all 10 commands.** Fixed address/pairing ID, unaffected by which button is pressed. |
+| Address | 0–23 | **Identical across all 10 commands.** Identifies the remote/receiver pair, unaffected by which button is pressed — see "Addressing and pairing" below. |
 | Family flag | 24, 25, 26, 31, 32, 39, 40 | Constant *within* a command family, different *between* families — see table below. |
 | Command code | 28, 29, 30, 36/37/38, 44/45/46 | The button-specific value, 2 or 3 bits depending on family — see below. |
 | Remaining | 27, 33, 34, 35, 41, 42, 43 | 27 is always `2`. The rest move in lockstep with the flame family's command code (see "open question" below) but aren't otherwise understood. |
@@ -162,6 +234,63 @@ verified — treat them as "known to move, meaning unconfirmed" rather than fill
 each internally consistent across several repeats with zero decode disagreement) and for the
 3-bit flame-level encoding (it reproduces 1–5 exactly). Lower for the leftover positions in the
 "open question" above. None of this is verified against a spec.
+
+## Addressing and pairing
+
+Heat & Glo remotes are paired to a specific fireplace receiver, so each unit must be
+distinguishable on air. Positions 0–23 are the only part of the frame that never changes with
+the button pressed, which makes them the obvious candidate for that per-unit address:
+
+```
+address (24 symbols): 2,2,3,2,2,2,3,1,3,2,3,2,2,3,3,0,2,3,3,2,2,3,3,0
+```
+
+Every frame is therefore `address (24) + command (23)`, and the app stores one address per paired
+device and prepends it to the fixed command suffixes in
+[`drivers/rc300/rc300-protocol.js`](drivers/rc300/rc300-protocol.js).
+
+**This is an inference, not a measurement.** All 10 captures come from a *single* remote, so the
+data alone cannot distinguish "unique per unit" from "constant across every RC300 ever made" —
+both look identical with a sample size of one. What makes the address reading much more likely is
+the product itself: pairing a remote to a receiver is only meaningful if the receiver learns to
+recognise one specific transmitter, which a universal shared code would make pointless.
+
+The same caveat applies in reverse to the command region (24–46): it is only verified against one
+unit, so if any of it also varies per-unit we would have no way to see that here. Confirming
+either way needs captures from a second, independently-paired RC300.
+
+Because of this, the app **learns the address from the user's own remote at pair time** rather
+than hardcoding one (see [`drivers/rc300/driver.js`](drivers/rc300/driver.js)). It listens on 433
+MHz, waits for a frame whose trailing 23 symbols match a known command, and keeps the leading 24
+as that device's address. Matching on a known command suffix is what stops it from pairing to an
+unrelated 433 MHz device that happens to transmit while the user is pressing their remote.
+
+Note this clones an existing remote rather than inventing a new address and teaching it to the
+receiver. Cloning only requires the remote the user already has; the alternative would require
+physical access to the receiver module and a "learn" procedure we have no evidence of.
+
+## Unmapped remote functions: AUX1 and AUX2
+
+The RC300 handset also carries **AUX1** and **AUX2** buttons, which this app does not implement.
+Neither is wired to anything on the fireplace they were reverse-engineered against, so no RF has
+been captured for them and there was no way to confirm what a capture would even do.
+
+From how they behave on the handset:
+
+| Button | Behaviour | Likely encoding |
+|---|---|---|
+| AUX1 | multi-level, like flame height | a level field, plausibly the same 3-bit counter FLAME uses |
+| AUX2 | binary, on/off | a 2-symbol code, like POWER and FAN |
+
+Both are **predictions from the button behaviour, not from captured data.** They do fit the
+protocol's shape though: the frame layout has room for them, and there is already known unused
+code space — the POWER/FAN 2-symbol field has a fourth value (`2,2`) that no known command uses,
+and the FLAME 3-bit field leaves `000`, `110` and `111` free. Whether AUX1/AUX2 occupy that space
+or introduce their own family flags is unknown.
+
+Adding them is a future task, and only worth doing on a unit where the buttons actually control
+something — otherwise there is no way to tell a working implementation from a broken one. The
+capture and decode procedure below applies unchanged.
 
 ## Adding a new command
 
