@@ -1,6 +1,6 @@
 {
   "id": "com.heatnglo.rc300",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -11,10 +11,10 @@
     "en": "Heat & Glo"
   },
   "description": {
-    "en": "Control your Heat & Glo gas fireplace's power, flame and fan from Homey.",
-    "nl": "Bedien je Heat & Glo gashaard vanaf Homey: aan/uit, vlamhoogte en ventilator.",
-    "de": "Steuere deinen Heat & Glo Gaskamin mit Homey: Ein/Aus, Flammenhöhe und Lüfter.",
-    "fr": "Pilotez votre foyer à gaz Heat & Glo depuis Homey : allumage, hauteur de flamme et ventilateur."
+    "en": "Light the fire without leaving the sofa.",
+    "nl": "Steek het vuur aan zonder van de bank te komen.",
+    "de": "Entzünde das Feuer, ohne vom Sofa aufzustehen.",
+    "fr": "Allumez le feu sans quitter le canapé."
   },
   "tags": {
     "en": ["heatnglo", "intellifire", "remote", "rc300", "fire", "gas", "fireplace"],
