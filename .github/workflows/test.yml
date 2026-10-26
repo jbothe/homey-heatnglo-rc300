@@ -1,0 +1,21 @@
+name: Test
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  main:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # No install step: the suite runs on the built-in `node:test`, and the
+      # app has no dependencies, so there is nothing to fetch or cache.
+      - name: Run tests
+        run: npm test
