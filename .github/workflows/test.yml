@@ -17,5 +17,9 @@ jobs:
 
       # No install step: the suite runs on the built-in `node:test`, and the
       # app has no dependencies, so there is nothing to fetch or cache.
+      #
+      # Coverage is reported, not enforced: a threshold here would also cover
+      # any module a future test file happens to load, and fail the moment one
+      # arrives partly covered. The figures are in this job's log.
       - name: Run tests
-        run: npm test
+        run: npm run test:coverage
