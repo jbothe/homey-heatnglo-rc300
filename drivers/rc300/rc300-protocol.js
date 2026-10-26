@@ -77,6 +77,42 @@ function isPowerCommand(command) {
     return typeof command === 'string' && command.startsWith('power.');
 }
 
+// The Homey capability each command family updates. `power` is Homey's own
+// `onoff`; the other two are this app's custom enum capabilities, whose values
+// are exactly the FAN and FLAME table keys.
+const CAPABILITY_BY_FAMILY = {
+    power: 'onoff',
+    fan: 'fan_level',
+    flame: 'flame_level',
+};
+
+// Translates a command name into the capability update it stands for, so a
+// frame heard from the remote can be reflected in Homey. Returns
+// { capability, value }, or null for anything this app does not handle.
+function commandToCapability(command) {
+    if (typeof command !== 'string') {
+        return null;
+    }
+
+    const parts = command.split('.');
+    if (parts.length !== 2) {
+        return null;
+    }
+
+    const [family, value] = parts;
+    if (value === '') {
+        return null;
+    }
+
+    const capability = CAPABILITY_BY_FAMILY[family];
+    if (capability === undefined) {
+        return null;
+    }
+
+    // `onoff` is a boolean; the level capabilities take the value as it stands.
+    return { capability, value: family === 'power' ? value === 'on' : value };
+}
+
 // Whether a received frame belongs to a given fireplace, so one household's
 // remote can't drive another's device.
 function sameAddress(a, b) {
@@ -84,6 +120,27 @@ function sameAddress(a, b) {
         && Array.isArray(b)
         && a.length === b.length
         && a.every((symbol, i) => symbol === b[i]);
+}
+
+// How long to collapse repeats of the same received command, in milliseconds.
+const RX_REPEAT_WINDOW = 2000;
+
+// Whether a received command repeats the previous one closely enough to ignore.
+//
+// One press of the remote can reach us as two or three separate receptions: the
+// `isFirst` flag only groups frames Homey heard as a single burst, and reception
+// dropping briefly mid-transmission starts a new one. Collapsing repeats of the
+// same command within this window is safe because every RC300 command is
+// absolute ("set flame to 3"), never relative ("flame up"), so a suppressed
+// duplicate can never lose information.
+//
+// `last` is the previous accepted reception as { command, at }, or null/undefined
+// before the first one.
+function isRepeatReception(command, now, last) {
+    return last !== null
+        && last !== undefined
+        && command === last.command
+        && now - last.at < RX_REPEAT_WINDOW;
 }
 
 module.exports = {
@@ -94,7 +151,10 @@ module.exports = {
     POWER,
     FAN,
     FLAME,
+    RX_REPEAT_WINDOW,
     identifyFrame,
     isPowerCommand,
+    commandToCapability,
     sameAddress,
+    isRepeatReception,
 };
