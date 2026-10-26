@@ -10,6 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Runs before validation: it is the quicker of the two, so a broken
+      # protocol change fails the job without waiting on the validator.
+      #
+      # No install step -- the suite runs on the built-in `node:test` and the
+      # app has no dependencies, so there is nothing to fetch or cache.
+      # Coverage is reported, not enforced; the figures are in this job's log.
+      - name: Run tests
+        run: npm run test:coverage
+
       - uses: athombv/github-action-homey-app-validate@master
         with:
           level: verified
