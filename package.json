@@ -4,8 +4,8 @@
   "description": "Adds support for fireplaces controlled by the Heat N Glo RC300 Intellifire Plus remote.",
   "main": "app.js",
   "scripts": {
-    "test": "node --test",
-    "test:coverage": "node --test --experimental-test-coverage --test-coverage-exclude='test/**'"
+    "test": "node --test 'test/**/*.test.js'",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-exclude='test/**' 'test/**/*.test.js'"
   },
   "license": "GPL-3.0",
   "author": "John Bothe <jbothe@gmail.com>",
