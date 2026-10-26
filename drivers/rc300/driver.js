@@ -66,7 +66,15 @@ class Rc300Driver extends Homey.Driver {
         this.rxListeners.add(listener);
 
         if (this.rxListeners.size === 1) {
-            await this.signal.enableRX();
+            try {
+                await this.signal.enableRX();
+            } catch (err) {
+                // Un-count it. A listener left in the set but never served would
+                // make every later one think RX was already on, so nothing would
+                // try to enable it again until the app restarted.
+                this.rxListeners.delete(listener);
+                throw err;
+            }
             this.log('RX enabled');
         }
     }
