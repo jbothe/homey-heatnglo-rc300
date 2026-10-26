@@ -7,12 +7,15 @@ const {
     ADDRESS_LENGTH,
     COMMAND_LENGTH,
     FRAME_LENGTH,
+    RX_REPEAT_WINDOW,
     POWER,
     FAN,
     FLAME,
     identifyFrame,
     isPowerCommand,
+    commandToCapability,
     sameAddress,
+    isRepeatReception,
 } = require('../drivers/rc300/rc300-protocol');
 
 // A stand-in for a per-unit address. No real remote's address is published
@@ -223,5 +226,94 @@ test('sameAddress', async (t) => {
         // ADDRESS_LENGTH before it ever gets here, so this cannot be reached
         // through the driver.
         assert.equal(sameAddress([], []), true);
+    });
+});
+
+test('commandToCapability', async (t) => {
+    // Must agree with what identifyFrame produces, since that is its only
+    // real caller -- so drive it from real frames, not hand-written names.
+    await t.test('maps power frames onto the boolean onoff capability', () => {
+        assert.deepEqual(commandToCapability('power.on'), { capability: 'onoff', value: true });
+        assert.deepEqual(commandToCapability('power.off'), { capability: 'onoff', value: false });
+    });
+
+    await t.test('maps every known command to a capability and value', () => {
+        for (const value of Object.keys(FAN)) {
+            const { command } = identifyFrame(frameFor(FAN[value]));
+            assert.deepEqual(commandToCapability(command), { capability: 'fan_level', value });
+        }
+        for (const value of Object.keys(FLAME)) {
+            const { command } = identifyFrame(frameFor(FLAME[value]));
+            assert.deepEqual(commandToCapability(command), { capability: 'flame_level', value });
+        }
+        for (const name of Object.keys(POWER)) {
+            const { command } = identifyFrame(frameFor(POWER[name]));
+            assert.deepEqual(commandToCapability(command), {
+                capability: 'onoff',
+                value: name === 'on',
+            });
+        }
+    });
+
+    await t.test('keeps level values as the strings the capability enums use', () => {
+        // The flame capability's enum ids are "1".."5", not numbers; handing
+        // Homey a number would not match any of them.
+        const { value } = commandToCapability('flame.3');
+        assert.equal(value, '3');
+        assert.equal(typeof value, 'string');
+    });
+
+    await t.test('rejects an unknown family', () => {
+        assert.equal(commandToCapability('timer.on'), null);
+        assert.equal(commandToCapability('onoff.on'), null);
+    });
+
+    await t.test('rejects a name that is not exactly family.value', () => {
+        for (const command of ['power', 'power.', '.on', 'power.on.extra', '', 'fan']) {
+            assert.equal(commandToCapability(command), null, `accepted ${JSON.stringify(command)}`);
+        }
+    });
+
+    await t.test('rejects anything that is not a string', () => {
+        for (const command of [null, undefined, 0, {}, ['power.on'], true]) {
+            assert.equal(commandToCapability(command), null, `accepted ${JSON.stringify(command)}`);
+        }
+    });
+});
+
+test('isRepeatReception', async (t) => {
+    const last = { command: 'flame.3', at: 10_000 };
+
+    await t.test('has nothing to repeat before the first reception', () => {
+        // The device starts with no previous reception, and must act on the
+        // first frame it hears rather than swallowing it.
+        assert.equal(isRepeatReception('flame.3', 10_000, null), false);
+        assert.equal(isRepeatReception('flame.3', 10_000, undefined), false);
+    });
+
+    await t.test('suppresses the same command inside the window', () => {
+        assert.equal(isRepeatReception('flame.3', last.at, last), true);
+        assert.equal(isRepeatReception('flame.3', last.at + 1, last), true);
+        assert.equal(isRepeatReception('flame.3', last.at + RX_REPEAT_WINDOW - 1, last), true);
+    });
+
+    await t.test('lets the same command through once the window closes', () => {
+        // Pressing flame 3 twice, a few seconds apart, must register twice.
+        assert.equal(isRepeatReception('flame.3', last.at + RX_REPEAT_WINDOW, last), false);
+        assert.equal(isRepeatReception('flame.3', last.at + RX_REPEAT_WINDOW + 1, last), false);
+    });
+
+    await t.test('never suppresses a different command', () => {
+        // Flame 3 then flame 4 in quick succession is two real presses; losing
+        // the second would leave Homey showing the wrong level.
+        for (const command of ['flame.4', 'fan.low', 'power.off']) {
+            assert.equal(isRepeatReception(command, last.at + 1, last), false, command);
+        }
+    });
+
+    await t.test('does not suppress on a clock that went backwards', () => {
+        // now - at is negative, which is still inside the window by comparison,
+        // so this records current behaviour: a backwards clock suppresses.
+        assert.equal(isRepeatReception('flame.3', last.at - 5_000, last), true);
     });
 });

@@ -1,20 +1,24 @@
 'use strict';
 
 const Homey = require('homey');
-const { SIGNAL_ID, ADDRESS_LENGTH, POWER, FAN, FLAME, sameAddress } = require('./rc300-protocol');
-
-// One press of the remote can reach us as two or three separate receptions: the
-// `isFirst` flag only groups frames Homey heard as a single burst, and reception
-// dropping briefly mid-transmission starts a new one. Collapsing repeats of the
-// same command within this window is safe because every RC300 command is
-// absolute ("set flame to 3"), never relative ("flame up"), so a suppressed
-// duplicate can never lose information.
-const RX_REPEAT_WINDOW = 2000;
+const {
+    SIGNAL_ID,
+    ADDRESS_LENGTH,
+    POWER,
+    FAN,
+    FLAME,
+    sameAddress,
+    isRepeatReception,
+    commandToCapability,
+} = require('./rc300-protocol');
 
 class Rc300Device extends Homey.Device {
     // This method is called when the Device is initiated
     async onInit() {
         this.rc300Signal = this.homey.rf.getSignal433(SIGNAL_ID);
+
+        // The last reception acted on, for collapsing repeats of one press.
+        this.lastRx = null;
 
         // The address is learned from the user's own remote during pairing. There
         // is no default: transmitting an address we guessed would drive whichever
@@ -57,30 +61,22 @@ class Rc300Device extends Homey.Device {
         if (!sameAddress(frame.address, this.address)) return;
 
         const now = Date.now();
-        if (frame.command === this.lastRxCommand && now - this.lastRxAt < RX_REPEAT_WINDOW) {
-            return;
-        }
-        this.lastRxCommand = frame.command;
-        this.lastRxAt = now;
+        if (isRepeatReception(frame.command, now, this.lastRx)) return;
+        this.lastRx = { command: frame.command, at: now };
 
-        const [family, value] = frame.command.split('.');
+        const update = commandToCapability(frame.command);
+        if (update === null) return;
 
         // setCapabilityValue, not triggerCapabilityListener: this reflects a
         // change that already happened, and must not transmit it back.
-        switch (family) {
-            case 'power':
-                // onoff is Homey's own capability, so Homey fires its Flow
-                // cards itself whenever the value changes.
-                this.setCapabilityValue('onoff', value === 'on').catch(this.error);
-                break;
-            case 'fan':
-                this.setLevel('fan_level', value).catch(this.error);
-                break;
-            case 'flame':
-                this.setLevel('flame_level', value).catch(this.error);
-                break;
-            default:
-                return;
+        if (update.capability === 'onoff') {
+            // onoff is Homey's own capability, so Homey fires its Flow cards
+            // itself whenever the value changes.
+            this.setCapabilityValue('onoff', update.value).catch(this.error);
+        } else {
+            // Nothing generates Flow cards for a custom capability, so
+            // setLevel fires the hand-written trigger as well.
+            this.setLevel(update.capability, update.value).catch(this.error);
         }
 
         this.log(`rx ${frame.command} from the remote`);
